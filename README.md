@@ -26,3 +26,9 @@
 * [ELO Estimation from PGN using Fine-Tuning of DeBERTa-v3-small](https://github.com/AlexSalazar314/Portafolio/tree/main/EstimacionDeElo_FineTunning)
 
   * This work focuses on estimating the Elo rating of chess players from the PGN notation of their games. Two approaches are compared: a sequential model with word embeddings and a pretrained Large Language Model (LLM) architecture, specifically DeBERTa-v3-small. A public dataset from lichess.org is used. Results show that the word embedding model suffers from overfitting and does not generalize well, while DeBERTa provides more stable predictions, although with significant errors in low-density data regions.
+
+### Información de contacto
+Si tienes alguna duda o pregunta sientete libre de enviarme un correo a [alejandro.sg314@gmail.com](mailto:alejandro.sg314@gmail.com).
+
+### Contact Information
+If you have any questions or inquiries, feel free to send me an email at [alejandro.sg314@gmail.com](mailto:alejandro.sg314@gmail.com).
