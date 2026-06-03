@@ -1,3 +1,4 @@
+![](Images/portada.jpg)
 # Portafolio
 !Hola! Bienvenido a mi portafolio de proyectos. En este espacio encontrarás algunos trabajos que he realizado en materias relacionadas a ciencias de datos, visión computacional, aprendizaje automático, entre otros.
 
