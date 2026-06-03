@@ -11,7 +11,7 @@
    - Se presenta el material de apoyo empleado durante el taller: Análisis de datos con aprendizaje computacional, presentado en la [9ª Escuela de Invierno en Ciencia de Datos y Sistemas Complejos](https://sites.google.com/view/escuela-ciencia-de-datos/p%C3%A1gina-principal?authuser=0) . Se da una breve intruducción acerca de lo que son las series de tiempo, sistemas dinámicos y una implementación de redes neuronales. 
 
 + [Estimación de ELO a partir de PGN mediante ajuste fino de DeBERTa-v3-small](https://github.com/AlexSalazar314/Portafolio/tree/main/EstimacionDeElo_FineTunning)
-   - este trabajo se trata de estimar el puntaje Elo de jugadores de ajedrez a partir de la notación PGN de sus partidas. Se comparan dos enfoques: un modelo secuencial con word embeddings y una arquitectura preentrenada tipo Large Language Model (LLM), en este caso DeBERTa-v3-small. Se utiliza una base de datos pública que provinó de lichess.org. Los resultados muestran que el modelo con word embeddings presenta sobreajuste y no generaliza adecuadamente, mientras que DeBERTa ofrece predicciones más estables aunque con errores significativos en zonas de baja densidad de datos
+   - Se estima el puntaje Elo de jugadores de ajedrez a partir de la notación PGN de sus partidas. Se comparan dos enfoques: un modelo secuencial con word embeddings y una arquitectura preentrenada tipo Large Language Model (LLM), en este caso DeBERTa-v3-small. Se utiliza una base de datos pública que provinó de lichess.org. Los resultados muestran que el modelo con word embeddings presenta sobreajuste y no generaliza adecuadamente, mientras que DeBERTa ofrece predicciones más estables aunque con errores significativos en zonas de baja densidad de datos
 
 ## Index
 
