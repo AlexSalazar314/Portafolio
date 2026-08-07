@@ -47,7 +47,7 @@ En dicha liga nos dirigimos a "planetary systems" y se filtran aquellos datos qu
 6. Gravedad estelar en superficie (st_logg)
 7. Distancia a la estrella (sy_dist)
 
-Se eliminan aquellas columnas que cuenten con valores nulos y se aplican normalización a los datos para evitar que alguna variable sea dominante respecto a las demás debido a las diferentes escalas. Después de todas estas consideraciones nuestro conjunto de datos consta de 14,037 filas y 7 columnas ya antes descritas. 
+Se eliminan aquellos datos que cuenten con valores nulos y se realiza una normalización  para evitar que alguna variable sea dominante respecto a las demás debido a las diferentes escalas. Después de todas estas consideraciones nuestro conjunto de datos consta de 14,037 filas y 7 columnas ya antes descritas. 
 
 
 ## Análisis exploratorio
@@ -106,26 +106,33 @@ En lo que respecta al periodo orbital se muestra que el exoplaneta EPIC 24884749
 
 ### IF y LOF
 
-Para detectar las anomalías se decide trabajar con los algoritmos Isolation Forest (IF) y Local Outlier Factor (LOF).
+Los parámetros a escoger para trabajar con IF y LOF son el número de árboles de decisión y el número de vecinos respectivamente. Para determinar los valores adecuados se realizan las siguientes gráficas, dónde se muestran como varia el número de anomalías conforme el valor del respectivo parámetro cambia para determinar si existe alguna convergencia. 
 
 | ![](Imagenes/SeleccionParametros/Anomalias_vs_Trees.png) | ![](Imagenes/SeleccionParametros/Anomalias_vs_Vecinos.png) |
 | -------------------------------------------------------- | ---------------------------------------------------------- |
-| (a)                                                      | (b)                                                        |
+| (a) Convergencia IF                                                 | (b)   Convergencia LOF                                                     |
+
+Al analizar la gráficas de convergencia se decide seleccionar 100 árboles de decisión y 10 vecinos para trabajar con nuestros datos, puesto que aparenta que existe estabilidad alrededor de esos valores. 
+
 
 
 ---
 
 ### Autodecodificador
 
-Se emplea autocodificador para detectar las anomalías. La arquitectura se esquematiza en la figura de la izquierda. Se emplearon funciones de activación *tanh* en las capas ocultas.
-Se usa MSE como función de pérdida. El espacio latente lo podemos emplear para la representación en dos dimensiones de nuestros datos.
+Una red autocodificadora recibe de entrada los datos a analizar, pasa por una serie de capas las cuales van disminuyendo gradualmente el número de neuronas para poder comprimir la información en un espacio latente, para luego descomprimirla en un proceso inverso. En la siguiente figura se esquematiza la arquitectura empleada para este trabajo, donde las capas son representadas mediante rectángulos azules dónde la parte superior indica el número de neuronas que poseen. Se emplearon funciones de activación *tanh* en las capas ocultas. Se usa MSE como función de pérdida. El espacio latente lo podemos emplear para la representación en dos dimensiones de nuestros datos.
 
-* 80 % de los datos se emplea para entrenamiento y 20% para pruebas.
-* 100 épocas y un tamaño de batch de 32.
+Podemos usar una red autodecodificadora para detectar anomalias si consideramos aquellos datos que tengan mayor error al momento de la reconstrucción, es decir, a la red le costará más trabajo decodificar aquellos exoplanetas que no sean tan comunes, pues el conjunto de sus características no se presentan a menudo. 
+
 
 <p align="center">
   <img src="Imagenes/SeleccionParametros/Autoencoder.jpg" width="50%">
 </p>
+Para el entrenamiento:
+
+* 80 % de los datos se emplea para entrenamiento y 20% para pruebas.
+* 100 épocas y un tamaño de batch de 32.
+
 
 ---
 
@@ -178,13 +185,13 @@ Los 3 métodos detectaron tuvieron coincidencia en 79 planetas, entre los cuales
 ## Conclusiones
 Los análisis exploratorios nos pueden ayudar a darnos una idea si algún
 dato se encuentra fuera de lo común.
-• Se pueden emplear los autocodificadores para detectar anomalías si nos
+Se pueden emplear los autocodificadores para detectar anomalías si nos
 enfocamos a analizar que tan bien se reconstruyen los datos. Mayores
 errores podría indicarnos la presencia de un dato extraño.
-• Escoger la arquitectura lleva su reto, ya que no parece existir una “receta”
+Escoger la arquitectura lleva su reto, ya que no parece existir una “receta”
 que nos indique como armar un modelo. Se recomienda primero revisar en la
 literatura si existen redes empleadas para el fenómeno que se este
 analizando y no empezar desde cero.
-• Los algoritmos de reducción de dimensionalidad parecen ser muy atractivos
+Los algoritmos de reducción de dimensionalidad parecen ser muy atractivos
 para representar datos pero siempre hay que tener en consideración que la
 salida de estos son una “sombra” de la realidad.
