@@ -5,6 +5,9 @@
 *Hello! Welcome to my project portfolio. Here you will find some of the work I have completed in courses related to data science, computer vision, machine learning, among others.*
 
 ## Índice
++ [Detección de anomalias en sistemas planetarios](https://github.com/AlexSalazar314/Portafolio/tree/main/DeteccionAnomalias_SistemasPlanetarios)
+   - En este trabajo se realizará una detección de anomalías en las mediciones de los planetas mediante algoritmos de aprendizaje automático, entre los cuales se encuentran Isolation Forest (IF), Local Outlier Factor (LOF) y Autodecodificadores. 
+
 + [Detección de fase cardíaca en ecocardiogramas de murinos (Clasificador de sístole y diástole)](https://github.com/AlexSalazar314/Portafolio/tree/main/ClasificacionFaseCardiaca)
    - En este trabajo se presenta la implementación de una red neuronal convolucional (CNN) para la clasificación de fases cardiacas (sistole y diástole) en ecocardiogramas de corazones de ratones de laboratorio. Los resultados en el conjunto de test final arrojan un AUC de 0.95, lo que demuestra que el modelo tiene una buena capacidad para distinguir entre las clases. 
 + [Redes neuronales para la predicción de series de tiempo. ](https://github.com/AlexSalazar314/Portafolio/tree/main/EscuelaDeInvierno_RedesNeuronales_SeriesDeTiempo_2026)
@@ -15,6 +18,8 @@
 
 ## Index
 
+* [Anomaly Detection in Planetary Systems](https://github.com/AlexSalazar314/Portafolio/tree/main/ClasificacionFaseCardiaca)
+   - In this project, anomalies in planetary measurements will be detected using machine learning algorithms, including Isolation Forest (IF), Local Outlier Factor (LOF), and Autoencoders.
 * [Cardiac Phase Detection in Murine Echocardiograms (Systole and Diastole Classifier)](https://github.com/AlexSalazar314/Portafolio/tree/main/ClasificacionFaseCardiaca)
 
   * This work presents the implementation of a Convolutional Neural Network (CNN) for the classification of cardiac phases (systole and diastole) in echocardiograms of laboratory mouse hearts. Results on the final test set achieve an AUC of 0.95, demonstrating that the model has a strong ability to distinguish between classes.
