@@ -1,0 +1,8 @@
+requests
+pandas
+python-dotenv
+json
+google-cloud-bigquery
+matplotlib
+seaborn
+folium
