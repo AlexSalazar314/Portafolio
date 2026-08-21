@@ -16,11 +16,11 @@ if __name__ == "__main__":
     # ETL
     print("*************************************************")
     print("Extrayendo datos ..")
-    df,events,country = Extract.Main_Extract(project_id, PartionTime_init, PartionTime_end, Limit)
+    Extract.Main_Extract(project_id, PartionTime_init, PartionTime_end, Limit)
     print("*************************************************")
     print("Transformando datos ....")
-    df=Transform.transform_data(df,events,country)
+    Transform.transform_data()
     print("*************************************************")
     print("Cargando datos ......")
-    Load.MainLoad(df,project_id,bigquery=True)
+    Load.MainLoad(project_id,bigquery=True)
     

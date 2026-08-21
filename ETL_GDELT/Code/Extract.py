@@ -1,14 +1,18 @@
 from google.cloud import bigquery
 import pandas as pd
 from pathlib import Path
+from Storage import SaveParquet ,ReadParquet
 
 def Main_Extract(project_id, PartionTime_init, PartionTime_end, Limit):
     df=Extract_bigquery(project_id, PartionTime_init, PartionTime_end, Limit)
-    events,country=CountryEventsCodes()
+    CountryEventsCodes()
 
-
-
-    return df,events,country
+    # Save parquet
+    project_root = Path(__file__).resolve().parent.parent
+    df_dir = project_root / "data" / "raw"/"extractRaw.parquet"
+    SaveParquet(df, df_dir)
+    print("Extracción exitosa")
+    return 
 def Extract_bigquery(project_id, PartionTime_init, PartionTime_end, Limit):
 
     """
@@ -55,6 +59,8 @@ def Extract_bigquery(project_id, PartionTime_init, PartionTime_end, Limit):
     return df
 
 
+
+
 def CountryEventsCodes():
 
     """
@@ -66,22 +72,17 @@ def CountryEventsCodes():
     reference_dir = project_root / "data" / "reference"
     source_dir = project_root / "data" / "CountryAndEventCodes"
 
-    reference_dir.mkdir(parents=True, exist_ok=True)
-
     event_path = reference_dir / "event_codes.parquet"
     country_path = reference_dir / "country_codes.parquet"
 
-    # Si ya existen, no volvemos a procesar los TXT
+    # Si las referencias ya existen, las cargamos
     if event_path.exists() and country_path.exists():
 
-        events = pd.read_parquet(event_path)
-        country = pd.read_parquet(country_path)
+        return 
 
-        return events, country
-
-    # -----------------------------
-    # Crear referencias por primera vez
-    # -----------------------------
+    # -------------------------
+    # Eventos
+    # -------------------------
 
     events = pd.read_csv(
         source_dir / "CAMEO_eventcodes.txt",
@@ -95,18 +96,25 @@ def CountryEventsCodes():
     )
 
     events = events.rename(
-        columns={"CAMEOEVENTCODE": "EventCode"}
+        columns={
+            "CAMEOEVENTCODE": "EventCode"
+        }
     )
 
     country = pd.read_csv(
         source_dir / "FIPS_country.txt",
         sep="\t",
         header=None,
-        names=["ActionGeo_CountryCode", "CountryName"]
+        names=[
+            "ActionGeo_CountryCode",
+            "CountryName"
+        ]
     )
 
-    # Guardar referencias procesadas
-    events.to_parquet(event_path, index=False)
-    country.to_parquet(country_path, index=False)
+    # Guardar referencias
 
-    return events, country
+    SaveParquet(events,event_path)
+
+    SaveParquet(country,country_path)
+
+    return 

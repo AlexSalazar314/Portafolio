@@ -1,8 +1,11 @@
 import pandas as pd
 from google.cloud import bigquery
 from pathlib import Path
-
-def MainLoad( df,project_id,filename="events",carpeta="data",dataset_id="gdelt_pipeline",table="events",bigquery=False,save=True):
+from Storage import ReadParquet
+def MainLoad(project_id,filename="events",carpeta="data",dataset_id="gdelt_pipeline",table="events",bigquery=False,save=True):
+    project_root = Path(__file__).resolve().parent.parent
+        
+    df=ReadParquet(project_root / "data" /"raw"/"transformRaw.parquet")
     table_id=f"{project_id}.{dataset_id}.{table}"
     if bigquery:
         CreateDataset(project_id,dataset_id)

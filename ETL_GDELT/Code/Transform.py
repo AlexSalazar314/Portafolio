@@ -1,15 +1,25 @@
 import pandas as pd
+from Storage import ReadParquet, SaveParquet
+from pathlib import Path
 
-def transform_data(df,events,country):
+
+def transform_data():
     """
     Transforms the extracted GDELT data.
-
-    Parameters:
-        df (pandas.DataFrame): The extracted data.
-
-    Returns:
-        pandas.DataFrame: The transformed data.
+        
     """
+
+    project_root = Path(__file__).resolve().parent.parent
+    
+    reference_dir = project_root / "data" / "reference"
+    
+    event_path = reference_dir / "event_codes.parquet"
+    country_path = reference_dir / "country_codes.parquet"
+    df_transform_path=project_root / "data" /"raw"/"extractRaw.parquet"
+    events = ReadParquet(event_path)
+    country = ReadParquet(country_path)
+
+    df=ReadParquet(df_transform_path)
     # Convert SQLDATE to datetime
     df['SQLDATE'] = pd.to_datetime(df['SQLDATE'], format='%Y%m%d')
 
@@ -19,8 +29,9 @@ def transform_data(df,events,country):
     df.fillna({'Actor1Name': 'Unknown', 'Actor2Name': 'Unknown'}, inplace=True)
 
     df=MergeCountryEvents(df,events,country)
+    SaveParquet(df,project_root / "data" /"raw"/"transformRaw.parquet")
 
-    return df
+    return 
 
 
 
